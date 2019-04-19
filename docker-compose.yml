@@ -1,0 +1,33 @@
+version: '3'
+services:
+  data-collector-service:
+    build: ./data-collector-service
+    # restart: always
+
+    depends_on:
+      - database-service
+
+    # Deploy with 3 replicas in the case of failure of one of the containers (only in Docker Swarm)
+    #  deploy:
+    #    mode: replicated
+    #    replicas: 3
+  
+  database-service:
+    build: ./database-service
+    # restart: always
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: here
+      MYSQL_DATABASE: here
+      MYSQL_USER: here
+      MYSQL_PASSWORD: here
+    expose:
+      - 3306
+    # restart: always
+    volumes:
+      - ./database:/var/lib/mysql
+      - ./database-service/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro

@@ -1,0 +1,4 @@
+
+## Damn this crontab
+
+*/5 * * * * /usr/local/bin/python /app/app.py 
