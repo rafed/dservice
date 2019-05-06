@@ -1,7 +1,8 @@
 version: '3'
 services:
   data-collector-service:
-    build: ./data-collector-service
+    image: rafed123/dservice:data-collector-service
+    # build: ./data-collector-service
     # restart: always
 
     depends_on:
@@ -13,7 +14,8 @@ services:
     #    replicas: 3
   
   database-service:
-    build: ./database-service
+    image: rafed123/dservice:database-service
+    # build: ./database-service
     # restart: always
     depends_on:
       - mariadb
