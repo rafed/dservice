@@ -1,4 +1,6 @@
-from flask import Flask, request
+from flask import Flask
+import requests
+
 
 app = Flask(__name__)
 
@@ -6,23 +8,24 @@ app = Flask(__name__)
 def getRoadData():
     try:
         data = {
-            'src': #request.args['src'],
-            'dst' : #request.args['dst'],
-            'dateFrom' : #request.args['dateFrom'],
-            'dateTo' : #request.args['dateTo']
+            'src': "Adarsh Nagar Main Road", #request.args['src'],
+            'dst' : "Ashoka Road/Shah Alam Bandh Marg/Jahangirpuri Main Road" ,#request.args['dst'],
+            'dateFrom' : "07-05-2019", #request.args['dateFrom'],
+            'dateTo' : "07-05-2019" #request.args['dateTo']
         }
-        url = "http://database-service:8000/store"
+        print(data)
+        url = "http://172.16.21.70:9999/retrieve"
         response = requests.post(url,data=data)
-        print(response)
+        # print(response.text)
 
         return response
     except Exception as e:
-        print("Database error")
+        print(e)
 
+getRoadData()
+# @app.route('/')
+# def hello():
+#     return "Hello world"
 
-@app.route('/')
-def hello():
-    return "Hello world"
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8000)
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0', port=8000)
