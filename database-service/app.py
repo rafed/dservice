@@ -29,7 +29,7 @@ def store():
 
     return "Done!"
 
-@app.route('/retrieve', methods=['GET'])
+@app.route('/retrieve', methods=['POST'])
 def retrieve():
     try:
         src = request.args['src']

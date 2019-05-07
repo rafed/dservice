@@ -5,15 +5,17 @@ app = Flask(__name__)
 @app.route('/getRoadData', methods=['GET'])
 def getRoadData():
     try:
-        src = request.args['src']
-        dst = request.args['dst']
-        dateFrom = request.args['dateFrom']
-        dateTo = request.args['dateTo']
-        query = "select * from data where src=%s and dst=%s and STR_TO_DATE(date,'%m-%d-%Y')>=STR_TO_DATE(%s,'%m-%d-%Y') and STR_TO_DATE(date,'%m-%d-%Y')<=STR_TO_DATE(%s,'%m-%d-%Y')"
-        cursor.execute(query, src, dst,dateFrom, dateTo)
-        result = cursor.fetchall()
-        
-        return result
+        data = {
+            'src': #request.args['src'],
+            'dst' : #request.args['dst'],
+            'dateFrom' : #request.args['dateFrom'],
+            'dateTo' : #request.args['dateTo']
+        }
+        url = "http://database-service:8000/store"
+        response = requests.post(url,data=data)
+        print(response)
+
+        return response
     except Exception as e:
         print("Database error")
 
