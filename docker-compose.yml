@@ -3,7 +3,7 @@ services:
   data-collector-service:
     image: rafed123/dservice:data-collector-service
     # build: ./data-collector-service
-    # restart: always
+    restart: always
 
     depends_on:
       - database-service
@@ -16,7 +16,7 @@ services:
   database-service:
     image: rafed123/dservice:database-service
     # build: ./database-service
-    # restart: always
+    restart: always
     depends_on:
       - mariadb
 
