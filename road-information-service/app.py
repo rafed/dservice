@@ -1,31 +1,31 @@
-from flask import Flask
+from flask import Flask, request
 import requests
 
 
 app = Flask(__name__)
 
-@app.route('/getRoadData', methods=['GET'])
+@app.route('/getRoadData', methods=['POST'])
 def getRoadData():
     try:
         data = {
-            'src': "Adarsh Nagar Main Road", #request.args['src'],
-            'dst' : "Ashoka Road/Shah Alam Bandh Marg/Jahangirpuri Main Road" ,#request.args['dst'],
-            'dateFrom' : "07-05-2019", #request.args['dateFrom'],
-            'dateTo' : "07-05-2019" #request.args['dateTo']
+            'src': request.form['src'],
+            'dst' : request.form['dst'],
+            'dateFrom' : request.form['dateFrom'],
+            'dateTo' : request.form['dateTo']
         }
-        print(data)
-        url = "http://172.16.21.70:9999/retrieve"
+        print(data, flush=True)
+        url = "http://database-service:8000/retrieve"
         response = requests.post(url,data=data)
-        # print(response.text)
+        print(response.text, flush=True)
 
-        return response
+        return response.text
     except Exception as e:
-        print(e)
+        print(e, flush=True)
 
-getRoadData()
+# getRoadData()
 # @app.route('/')
 # def hello():
 #     return "Hello world"
 
-# if __name__ == "__main__":
-#     app.run(host='0.0.0.0', port=8000)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8000)

@@ -2,6 +2,7 @@ from flask import Flask, request
 import mysql.connector
 import pickle
 from datetime import datetime
+import json
 
 app = Flask(__name__)
 
@@ -31,19 +32,32 @@ def store():
 
 @app.route('/retrieve', methods=['POST'])
 def retrieve():
-    try:
-        src = request.args['src']
-        dst = request.args['dst']
-        dateFrom = request.args['dateFrom']
-        dateTo = request.args['dateTo']
-        query = "select * from data where src=%s and dst=%s and STR_TO_DATE(date,'%m-%d-%Y')>=STR_TO_DATE(%s,'%m-%d-%Y') and STR_TO_DATE(date,'%m-%d-%Y')<=STR_TO_DATE(%s,'%m-%d-%Y')"
-        cursor.execute(query, src, dst,dateFrom, dateTo)
-        result = cursor.fetchall()
-        
-        return result
-    except Exception as e:
-        print("Database error")
+    result = "asdf"
 
+    try:
+        print("pola",flush=True)
+
+        # src = request.args.get('src')
+        # dst = request.args.get('dst')
+        # dateFrom = request.args.get('dateFrom')
+        # dateTo = request.args.get('dateTo')
+
+        src = request.form['src']
+        dst = request.form['dst']
+        dateFrom = request.form['dateFrom']
+        dateTo = request.form['dateTo']
+
+        print("jajajaja", src,dst,dateFrom,dateTo,flush=True)
+
+        query = "select * from data where src=%s and dst=%s and STR_TO_DATE(date,'%d-%m-%Y')>=STR_TO_DATE(%s,'%d-%m-%Y') and STR_TO_DATE(date,'%d-%m-%Y')<=STR_TO_DATE(%s,'%d-%m-%Y')"
+        mycursor.execute(query, [src, dst, dateFrom, dateTo])
+        result = mycursor.fetchall()
+        
+        print("khajna", result,flush=True)
+    except Exception as e:
+        print("Database error ", e, flush=True)
+
+    return json.dumps(result)
 
 @app.route('/')
 def hello():

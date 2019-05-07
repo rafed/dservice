@@ -1,7 +1,17 @@
 version: '3'
 services:
+  road-information-service:
+    build: ./road-information-service
+
+    # Temporarily for mou test purposes
+    ports:
+      - "9999:8000"
+
+    depends_on:
+      - database-service
+
   data-collector-service:
-    image: rafed123/dservice:data-collector-service
+    image: rafed123/dservice:data-collector-service-1.1
     # build: ./data-collector-service
     restart: always
 
@@ -14,11 +24,12 @@ services:
     #    replicas: 3
   
   database-service:
-    image: rafed123/dservice:database-service
-    # build: ./database-service
+    # image: rafed123/dservice:database-service-1.1
+    build: ./database-service
     restart: always
     depends_on:
       - mariadb
+    
 
   mariadb:
     image: mariadb:10.2
