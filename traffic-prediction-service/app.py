@@ -26,11 +26,9 @@ def predictTrafficJam():
     except Exception as e:
         print(e)
 
+@app.route('/')
+def hello():
+    return "Hello world"
 
-predictTrafficJam()
-# @app.route('/')
-# def hello():
-#     return "Hello world"
-
-# if __name__ == "__main__":
-#     app.run(host='0.0.0.0', port=8000)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8000)
