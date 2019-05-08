@@ -2,6 +2,8 @@ version: '3'
 services:
   traffic-prediction-service:
     build: ./traffic-prediction-service
+    image: traffic-prediction-service:latest ###
+    restart: always
     # Temporarily for mou test purposes
     ports:
       - "9999:8000"
@@ -11,9 +13,14 @@ services:
   
   prediction-service:
     build: ./prediction-service
+    image: prediction-service:latest ###
+    restart: always
 
   road-information-service:
     build: ./road-information-service
+    image: road-information-service:latest ###
+    restart: always
+
     depends_on:
       - database-service
 
@@ -33,6 +40,8 @@ services:
   database-service:
     # image: rafed123/dservice:database-service-1.1
     build: ./database-service
+    image: database-service:latest ###
+
     restart: always
     depends_on:
       - mariadb
