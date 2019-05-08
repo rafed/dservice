@@ -19,6 +19,9 @@ def predictTrafficJam():
         url = "http://172.16.21.70:9999/getRoadData"
         response = requests.post(url,data=data)
         print(response.text)
+        
+        date = request.form['date']
+
         # columnNames = ['date', 'time', 'weekday', 'li', 'pc', 'src', 'dst', 'su', 'ff', 'temperature', 'daylight', 'humidity', 'raindesc', 'rainfall', 'windspeed', 'holiday', 'area', 'jf']
         # pd.DataFrame(response, columns=columnNames)
 
