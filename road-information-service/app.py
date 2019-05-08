@@ -16,7 +16,7 @@ def getRoadData():
         print(data, flush=True)
         url = "http://database-service:8000/retrieve"
         response = requests.post(url,data=data)
-        print(response.text, flush=True)
+        # print(response.text, flush=True)
 
         return response.text
     except Exception as e:

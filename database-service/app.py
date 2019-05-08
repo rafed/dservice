@@ -52,8 +52,6 @@ def retrieve():
         query = "select * from data where src=%s and dst=%s and STR_TO_DATE(date,'%d-%m-%Y')>=STR_TO_DATE(%s,'%d-%m-%Y') and STR_TO_DATE(date,'%d-%m-%Y')<=STR_TO_DATE(%s,'%d-%m-%Y')"
         mycursor.execute(query, [src, dst, dateFrom, dateTo])
         result = mycursor.fetchall()
-        
-        print("khajna", result,flush=True)
     except Exception as e:
         print("Database error ", e, flush=True)
 

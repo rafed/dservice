@@ -1,12 +1,19 @@
 version: '3'
 services:
-  road-information-service:
-    build: ./road-information-service
-
+  traffic-prediction-service:
+    build: ./traffic-prediction-service
     # Temporarily for mou test purposes
     ports:
       - "9999:8000"
+    depends_on:
+      - road-information-service
+      - prediction-service
+  
+  prediction-service:
+    build: ./prediction-service
 
+  road-information-service:
+    build: ./road-information-service
     depends_on:
       - database-service
 
@@ -30,7 +37,6 @@ services:
     depends_on:
       - mariadb
     
-
   mariadb:
     image: mariadb:10.2
     environment:
